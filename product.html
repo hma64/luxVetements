@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Produit — LUX vêtements</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-wrap">
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu"><span></span></button>
+      <a class="logo" href="index.html">
+        <img src="logo-lux.png" width="48" height="48" alt="LUX vêtements — logo luxe métallique avec couronne et monogramme" />
+        <span>LUX</span> vêtements
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#home" id="navHome">Accueil</a></li>
+        <li><a href="produits.html" id="navShop">Boutique</a></li>
+        <li><a href="index.html#contact" id="navContact">Contact</a></li>
+        <li><a href="produits.html" id="btnAllProducts">Voir tous les produits</a></li>
+        <li class="nav-lang-mobile">
+          <button type="button" class="lang-option nav-lang-opt" data-lang="fr" id="navLangFr">Français</button>
+          <button type="button" class="lang-option nav-lang-opt" data-lang="ar" id="navLangAr">العربية</button>
+        </li>
+      </ul>
+      <div class="nav-actions">
+        <div class="lang-dropdown">
+          <button type="button" class="lang-toggle" id="langToggleBtn">Français</button>
+          <div class="lang-menu" id="langMenu">
+            <button type="button" class="lang-option" data-lang="fr" id="langOptionFr">Français</button>
+            <button type="button" class="lang-option" data-lang="ar" id="langOptionAr">العربية</button>
+          </div>
+        </div>
+        <a class="cart-btn" href="produits.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="16" height="16" style="flex-shrink:0"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span id="cartLabelText">Panier</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="product-page-main container" id="productRoot">
+    <p style="margin: 24px 0;"><a href="produits.html" id="backLink" class="btn btn-outline" style="display: inline-flex">Retour à la boutique</a></p>
+    <div class="product-detail-grid">
+      <div>
+        <div class="main-image-box">
+          <img id="detailMainImage" src="" alt="" />
+        </div>
+        <div class="gallery" id="detailGallery"></div>
+      </div>
+      <div class="details-content">
+        <h1 id="detailName">—</h1>
+        <div class="details-price" id="detailPrice">0 DT</div>
+        <span class="badge details-category" id="detailCategory"></span>
+        <div class="detail-tag-text" id="detailTagText"></div>
+        <p id="detailDescription"></p>
+
+        <div class="option-group">
+          <span class="option-label" id="labelColor">Couleur</span>
+          <div class="option-buttons" id="colorOptions"></div>
+        </div>
+        <div class="option-group" id="sizeGroup">
+          <span class="option-label" id="labelSizeGeneric">Taille</span>
+          <div class="option-buttons" id="sizeOptions"></div>
+        </div>
+        <div class="option-group" id="sizeSwitcher" style="display:none; gap:0.5rem; align-items:center;">
+          <button type="button" class="btn btn-outline" id="sizeBtnEur">EUR</button>
+          <button type="button" class="btn btn-outline" id="sizeBtnUsa">USA</button>
+        </div>
+        <div class="option-group" id="usaGroup">
+          <span class="option-label" id="labelSizeUsa">Taille USA</span>
+          <div class="option-buttons" id="sizeOptionsUsa"></div>
+        </div>
+        <div class="option-group" id="eurGroup">
+          <span class="option-label" id="labelSizeEur">Taille EUR</span>
+          <div class="option-buttons" id="sizeOptionsEur"></div>
+        </div>
+
+        <div class="stock-msg" id="stockMsg" aria-live="polite"></div>
+
+        <div class="order-panel">
+          <div class="error-text" id="selectionError"></div>
+          <button type="button" class="btn btn-primary" id="addToCartBtn">Ajouter au panier</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="footer-logo" href="index.html">LUX vêtements</a>
+        <p>Une maison de mode homme premium, alliant élégance contemporaine et savoir-faire raffiné.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Liens rapides</h3>
+        <a href="index.html">Accueil</a>
+        <a href="produits.html">Boutique</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact</h3>
+        <p>Téléphone: <a href="tel:+21698137767">+216 98 137 767</a></p>
+        <p>Email: <a href="mailto:contact@luxvetementshomme.com">contact@luxvetementshomme.com</a></p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="WhatsApp">WhatsApp</a>
+          <a href="#" aria-label="Messenger">Messenger</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      LUX vêtements — © <span id="year"></span> · Tous droits réservés
+      <a class="footer-admin-btn" href="admin.html" title="Admin">Admin</a>
+    </div>
+  </footer>
+
+  <script type="module" src="js/product-page.js"></script>
+  <script type="module" src="js/admin-trigger.js"></script>
+</body>
+</html>

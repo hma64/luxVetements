@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard — LUX vêtements</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+  <header class="navbar admin-navbar">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html">
+        <img src="logo-lux.png" width="48" height="48" alt="LUX vêtements" />
+        <span>LUX</span>
+      </a>
+      <div class="admin-top-right">
+        <span class="admin-status" id="adminStatus">Mode administrateur</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-page container">
+    <section class="admin-login" id="adminLogin">
+      <div class="admin-card">
+        <h1>Connexion administrateur</h1>
+        <p>Accédez au tableau de bord caché avec un mot de passe sécurisé.</p>
+        <form id="adminLoginForm" class="admin-form">
+          <label for="adminPassword">Mot de passe</label>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <input id="adminPassword" name="adminPassword" type="password" autocomplete="current-password" placeholder="Entrez le mot de passe" required style="flex: 1;" />
+            <button type="button" id="passwordToggle" class="btn btn-outline" style="padding: 8px 12px; min-width: auto;" title="Afficher/Masquer le mot de passe">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+          <button type="submit" class="btn btn-primary">Se connecter</button>
+          <div class="admin-alert" id="adminAlert"></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="admin-panel hidden" id="adminPanel">
+      <div class="admin-panel-head">
+        <div>
+          <h1>Tableau de bord</h1>
+          <p>Contrôle des produits et aperçu des performances.</p>
+        </div>
+        <div class="admin-actions-row">
+          <button id="adminLogout" class="btn btn-outline">Déconnexion</button>
+        </div>
+      </div>
+
+      <div class="admin-overview-grid">
+        <article class="admin-card admin-stat">
+          <span>Total produits</span>
+          <strong id="statProducts">0</strong>
+        </article>
+        <article class="admin-card admin-stat">
+          <span>Produits en rupture</span>
+          <strong id="statOutOfStock">0</strong>
+        </article>
+        <article class="admin-card admin-stat">
+          <span>Promotions actives</span>
+          <strong id="statPromos">0</strong>
+        </article>
+        <article class="admin-card admin-stat">
+          <span>Catégories</span>
+          <strong id="statCategories">0</strong>
+        </article>
+      </div>
+
+      <div class="admin-tools">
+        <input id="productSearch" type="search" placeholder="Rechercher un produit..." />
+        <select id="categoryFilter">
+          <option value="all">Toutes les catégories</option>
+        </select>
+        <button id="refreshProducts" class="btn btn-outline">Actualiser</button>
+      </div>
+
+      <div class="admin-nav">
+        <button class="btn btn-outline" data-view="products">Produits</button>
+        <button class="btn btn-outline" data-view="add">Ajouter produit</button>
+        <button class="btn btn-outline" data-view="categories">Catégories</button>
+        <button class="btn btn-outline" data-view="orders">Commandes <span class="nav-badge hidden" id="ordersBadge">0</span></button>
+        <button class="btn btn-outline" data-view="settings">Paramètres</button>
+      </div>
+
+      <section id="viewProducts" class="admin-view">
+        <!-- produits (table exists below) -->
+      </section>
+
+      <section id="viewAdd" class="admin-view hidden">
+        <div class="admin-card">
+          <h2 id="productFormTitle">Ajouter un produit</h2>
+          <form id="addProductForm" class="admin-form">
+            <input type="hidden" id="pId" />
+            <div class="field"><label for="pName">Nom</label><input id="pName" required /></div>
+            <div class="field"><label for="pDescription">Description</label><textarea id="pDescription" rows="4" placeholder="Bref descriptif du produit"></textarea></div>
+            <div class="field"><label for="pImages">Images (URL, une par ligne ou séparées par des virgules)</label><textarea id="pImages" rows="3" placeholder="https://...jpg"></textarea></div>
+            <div class="field"><label for="pImage">Image de couverture (URL, optionnel)</label><input id="pImage" /></div>
+            <div class="field"><label for="pColors">Couleurs (optionnel, CSV)</label><input id="pColors" placeholder="Noir, Blanc, Rouge" /></div>
+            <div class="field"><label for="pPrice">Prix</label><input id="pPrice" type="number" step="0.01" required /></div>
+            <div class="field"><label for="pOldPrice">Prix ancien (optionnel)</label><input id="pOldPrice" type="number" step="0.01" /></div>
+            <div class="field"><label for="pCategory">Catégorie</label><select id="pCategory"><option value="">— Choisir —</option></select></div>
+            <div class="field"><label for="pTag">Tag / statut</label><input id="pTag" placeholder="ex: rupture, promo" /></div>
+            <div class="field"><label for="pSizes">Tailles libres (CSV)</label><input id="pSizes" placeholder="S,M,L ou 38,40" /></div>
+            <div class="field"><label for="pEur">Tailles EUR (CSV)</label><input id="pEur" placeholder="38,40,42" /></div>
+            <div class="field"><label for="pUsa">Tailles USA (CSV)</label><input id="pUsa" placeholder="S,M,L" /></div>
+            <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+              <button class="btn btn-primary" id="pSubmitBtn" type="submit">Ajouter</button>
+              <button class="btn btn-outline" type="button" id="clearProductForm">Effacer</button>
+            </div>
+            <div id="addProductAlert" class="admin-alert"></div>
+          </form>
+        </div>
+      </section>
+
+      <section id="viewCategories" class="admin-view hidden">
+        <div class="admin-card">
+          <h2>Gérer les catégories</h2>
+          <form id="addCategoryForm" class="admin-form">
+            <div class="field"><label for="newCategoryName">Nouvelle catégorie</label><input id="newCategoryName" required /></div>
+            <div style="margin-top:12px"><button class="btn btn-primary" type="submit">Ajouter catégorie</button></div>
+            <div id="categoryAlert" class="admin-alert"></div>
+          </form>
+          <div style="margin-top:12px">
+            <ul id="categoriesList"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="viewOrders" class="admin-view hidden">
+        <div class="admin-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <h2 style="margin:0;">Commandes</h2>
+            <button type="button" class="btn btn-outline" id="refreshOrders">Recharger</button>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table"><thead><tr><th>ID</th><th>Client</th><th>Total</th><th>Statut</th><th>Date</th><th>Actions</th></tr></thead>
+            <tbody id="ordersTableBody"></tbody></table>
+          </div>
+          <div id="ordersAlert" style="margin-top:12px; color:red; display:none;"></div>
+        </div>
+        <div id="orderDetailsPanel" class="admin-card hidden" style="margin-top:18px;">
+          <h3>Détails de la commande</h3>
+          <div id="orderDetailsContent"></div>
+        <div id="orderDetailsActions" style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;"></div>
+        </div>
+      </section>
+
+      <section id="viewSettings" class="admin-view hidden">
+        <div class="admin-card">
+          <h2>Paramètres du site</h2>
+          <form id="settingsForm" class="admin-form">
+            <div class="field"><label for="settingDelivery">Frais de livraison</label><input id="settingDelivery" type="number" step="0.01" /></div>
+            <div class="field"><label for="settingEmail">Email de destination des commandes</label><input id="settingEmail" type="email" /></div>
+            <div style="margin-top:12px"><button class="btn btn-primary" type="submit">Enregistrer</button></div>
+            <div id="settingsAlert" class="admin-alert"></div>
+          </form>
+        </div>
+        <div class="admin-card" style="margin-top: 24px;">
+          <h2>Changer le mot de passe administrateur</h2>
+          <form id="changePasswordForm" class="admin-form">
+            <div class="field"><label for="currentPassword">Mot de passe actuel</label><input id="currentPassword" type="password" required /></div>
+            <div class="field"><label for="newPassword">Nouveau mot de passe</label><input id="newPassword" type="password" required /></div>
+            <div class="field"><label for="confirmPassword">Confirmer le nouveau mot de passe</label><input id="confirmPassword" type="password" required /></div>
+            <div style="margin-top:12px"><button class="btn btn-primary" type="submit">Changer le mot de passe</button></div>
+            <div id="passwordChangeAlert" class="admin-alert"></div>
+          </form>
+        </div>
+      </section>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Produit</th>
+              <th>Catégorie</th>
+              <th>Prix</th>
+              <th>Statut</th>
+              <th>Promotion</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productsTableBody"></tbody>
+        </table>
+      </div>
+
+      <div class="admin-footer-note">
+        <p>Tableau de bord caché — accès réservé aux administrateurs.</p>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

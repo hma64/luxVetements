@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tous les produits — LUX vêtements</title>
+<link rel="stylesheet" href="css/site.css" />
+</head>
+<body id="catalogPage">
+<header class="navbar" style="display:none">
+<!-- legacy navbar hidden; replaced by injectNav() -->
+</header>
+
+<main id="catalog">
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="index.html">Accueil</a> &rsaquo; Boutique
+    </div>
+  </div>
+
+  <section class="catalog-body">
+    <div class="container">
+      <div class="loop-gallery reveal" style="margin-bottom: 20px">
+        <div class="loop-track" id="loopTrack"></div>
+      </div>
+      <div class="products-grid" id="productsContainer"></div>
+      <div class="state-box" id="stateBox" style="display: none"></div>
+    </div>
+  </section>
+</main>
+
+<div class="dim" id="cartDim"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+  <button class="cart-btn" id="closeCartBtn" type="button" style="align-self: flex-end; margin: 8px">✕</button>
+  <div class="cart-head">
+    <strong id="cartHeadLabel">Panier</strong>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div style="display: flex; justify-content: space-between; font-weight: 800; margin-bottom: 10px">
+      <span id="cartTotalLabel">Total</span>
+      <span id="cartTotal">0 DT</span>
+    </div>
+    <button class="btn btn-primary" id="checkoutBtn" type="button" style="width: 100%">Valider mes achats</button>
+  </div>
+</aside>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="footer-logo" href="index.html">LUX vêtements</a>
+      <p>Une maison de mode homme premium, alliant élégance contemporaine et savoir-faire raffiné.</p>
+    </div>
+    <div class="footer-links">
+      <h3>Liens rapides</h3>
+      <a href="index.html">Accueil</a>
+      <a href="produits.html">Boutique</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="footer-contact">
+      <h3>Contact</h3>
+      <p>Téléphone: <a href="tel:+21698137767">+216 98 137 767</a></p>
+      <p>Email: <a href="mailto:contact@luxvetementshomme.com">contact@luxvetementshomme.com</a></p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="WhatsApp">WhatsApp</a>
+        <a href="#" aria-label="Messenger">Messenger</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    LUX vêtements — © <span id="year"></span> · Tous droits réservés
+    <a class="footer-admin-btn" href="admin.html" title="Admin">Admin</a>
+  </div>
+</footer>
+
+<script type="module" src="js/catalog-page.js"></script>
+<script type="module">
+  import { injectNav } from './js/nav.js';
+  injectNav({ page: 'produits' });
+</script>
+<script type="module" src="js/admin-trigger.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LUX vêtements — Mode homme</title>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body id="catalogPage">
+  <header class="navbar" style="display:none">
+    <!-- legacy navbar hidden; replaced by injectNav() -->
+  </header>
+
+  <main id="home">
+    <!-- HERO IMAGE -->
+    <section class="hero-image" id="heroImage">
+      <img src="assets/hero.jpg" alt="LUX vêtements - Mode homme premium" loading="eager" />
+      <div class="hero-image-overlay">
+        <div class="hero-image-content">
+          <h2>Nouvelle<br><span>Collection</span><br>Printemps 2025</h2>
+          <p>Découvrez les dernières tendances de la maison.</p>
+          <a class="btn btn-primary" href="produits.html">Voir la collection</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="shop">
+      <div class="container">
+        <div class="products-grid" id="productsContainer"></div>
+        <div class="state-box" id="stateBox" style="display: none"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="dim" id="cartDim"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <button class="cart-btn" id="closeCartBtn" type="button" style="align-self: flex-end; margin: 8px">✕</button>
+    <div class="cart-head">
+      <strong id="cartHeadLabel">Panier</strong>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-foot">
+      <div style="display: flex; justify-content: space-between; font-weight: 800; margin-bottom: 10px">
+        <span id="cartTotalLabel">Total</span>
+        <span id="cartTotal">0 DT</span>
+      </div>
+      <button class="btn btn-primary" id="checkoutBtn" type="button" style="width: 100%">Valider mes achats</button>
+    </div>
+  </aside>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="footer-logo" href="index.html">LUX vêtements</a>
+        <p>Maison de mode homme premium, élégante et moderne.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Liens utiles</h3>
+        <a href="index.html">Accueil</a>
+        <a href="produits.html">Boutique</a>
+        <a href="produits.html">Nouveautés</a>
+      </div>
+      <div class="footer-contact">
+        <h3>Restez connectés</h3>
+        <div class="footer-social">
+          <a class="footer-social-link" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5Zm8.25 2.25a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5Zm-4.25 1.25a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Zm0 1.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/></svg>Instagram
+          </a>
+          <a class="footer-social-link" href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 3H9.75A4.75 4.75 0 0 0 5 7.75V11.5H2.5v4H5V22h4.5v-6.5h3.25l.5-4H9.5V8.25c0-.69.56-1.25 1.25-1.25h2.25V3Z"/></svg>Facebook
+          </a>
+          <a class="footer-social-link" href="https://wa.me/21698137767" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347Z"/></svg>WhatsApp
+          </a>
+          <a class="footer-social-link" href="https://m.me/" target="_blank" rel="noopener" aria-label="Messenger">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 5.92 2 10.5c0 2.76 1.4 5.21 3.6 6.75L5 22l4.05-2.2c.95.24 1.95.36 3 .36 5.52 0 10-3.92 10-8.5S17.52 2 12 2Zm1.44 11.03-2.14-2.19-3.13 2.19 4.17-4.63 2.14 2.19 3.13-2.19-4.17 4.63Z"/></svg>Messenger
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span id="footerNote">LUX vêtements</span> — © <span id="year"></span> · Tous droits réservés
+      <a class="footer-admin-btn" href="admin.html" aria-label="Admin dashboard">Admin</a>
+    </div>
+  </footer>
+
+  <script type="module" src="js/index-page.js"></script>
+  <script type="module">
+    import { injectNav } from './js/nav.js';
+    injectNav({ page: 'home' });
+  </script>
+  <script type="module" src="js/admin-trigger.js"></script>
+</body>
+</html>
